@@ -1,0 +1,323 @@
+/* ==========================================================================
+   BMSK BillsMoSagotKo - Modal & Overlay Styles
+   ========================================================================== */
+
+/* ---------------- Modal Overlay ---------------- */
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(8, 22, 18, 0.65);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 0;
+  animation: fadeIn 0.2s ease forwards;
+}
+
+.modal[hidden] {
+  display: none !important;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUpMobile {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+@keyframes scaleUpDesktop {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* ---------------- Modal Sheet Container ---------------- */
+.sheet {
+  background: var(--surface);
+  color: var(--ink);
+  width: 100%;
+  max-width: 580px;
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: 24px 24px 0 0;
+  border: 1px solid var(--line);
+  padding: 24px 20px calc(24px + env(safe-area-inset-bottom, 0px));
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  animation: slideUpMobile 0.25s var(--ease) forwards;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (min-width: 640px) {
+  .modal {
+    align-items: center;
+    padding: 24px;
+  }
+
+  .sheet {
+    border-radius: var(--r-lg);
+    max-height: 85vh;
+    animation: scaleUpDesktop 0.2s var(--ease) forwards;
+    padding: 28px 26px;
+  }
+}
+
+.sheet h2 {
+  font-size: 1.55rem;
+  font-weight: 800;
+  margin-bottom: 6px;
+  letter-spacing: -0.02em;
+  padding-right: 44px;
+}
+
+.sheet .sub {
+  color: var(--muted);
+  font-size: 0.94rem;
+  margin-bottom: 18px;
+  line-height: 1.5;
+}
+
+.xbtn {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  z-index: 10;
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+/* ---------------- Form Elements ---------------- */
+form {
+  display: grid;
+  gap: 16px;
+}
+
+label.f {
+  display: grid;
+  gap: 6px;
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: var(--ink);
+}
+
+label.f small {
+  font-weight: 400;
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.35;
+}
+
+.in {
+  min-height: 48px;
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--bg);
+  color: var(--ink);
+  padding: 10px 14px;
+  min-width: 0;
+  font-size: 16px; /* 16px prevents iOS auto-zoom on input focus */
+  transition: border-color var(--dur-fast) ease, box-shadow var(--dur-fast) ease;
+}
+
+.in:focus {
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px rgba(15, 92, 77, 0.15);
+  background: var(--surface);
+}
+
+textarea.in {
+  min-height: 96px;
+  resize: vertical;
+  line-height: 1.45;
+}
+
+.two {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+@media (max-width: 480px) {
+  .two {
+    grid-template-columns: 1fr;
+  }
+}
+
+.check {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  font-weight: 600;
+  font-size: 0.92rem;
+  cursor: pointer;
+}
+
+.check input {
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+  flex-shrink: 0;
+  accent-color: var(--brand);
+  cursor: pointer;
+}
+
+.warnbox {
+  border-left: 4px solid var(--accent);
+  background: var(--accent-light);
+  color: var(--ink);
+  padding: 12px 14px;
+  border-radius: 0 var(--r-md) var(--r-md) 0;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.err {
+  color: var(--warn);
+  font-weight: 700;
+  min-height: 1.2em;
+  font-size: 0.9rem;
+}
+
+/* ---------------- Key-Value Payment Rows ---------------- */
+.kv {
+  display: grid;
+  gap: 10px;
+}
+
+.kv div {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: space-between;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  padding: 10px 12px 10px 14px;
+  background: var(--bg);
+  min-width: 0;
+}
+
+.kv div span {
+  min-width: 0;
+}
+
+.kv small {
+  display: block;
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.kv code {
+  font-family: var(--f-mono);
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+  user-select: all;
+  letter-spacing: -0.01em;
+}
+
+.steps {
+  margin: 0;
+  padding-left: 1.25rem;
+  display: grid;
+  gap: 8px;
+  font-size: 0.92rem;
+  color: var(--ink-secondary);
+}
+
+.steps li::marker {
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.amts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+/* 1-Click GCash Direct Launch Box */
+.direct-pay-box {
+  background: var(--soft);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  padding: 14px 16px;
+  margin: 16px 0 10px;
+}
+
+.gcash-direct-btn {
+  width: 100%;
+  min-height: 48px;
+  font-size: 1rem;
+  letter-spacing: 0.01em;
+  gap: 10px;
+  box-shadow: 0 4px 14px rgba(233, 161, 0, 0.35);
+}
+
+.profile-hint-banner {
+  background: var(--brand-light);
+  border: 1px solid var(--brand);
+  border-radius: var(--r-md);
+  padding: 10px 14px;
+  color: var(--brand);
+  font-weight: 700;
+  font-size: 0.88rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+/* ---------------- Lightbox Image Modal ---------------- */
+.lightbox .sheet {
+  padding: 14px;
+  max-width: 780px;
+}
+
+.lightbox img {
+  width: 100%;
+  max-height: 75vh;
+  object-fit: contain;
+  display: block;
+  border-radius: var(--r-md);
+  background: #000;
+}
+
+/* ---------------- Toast Notification ---------------- */
+.toast {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+  background: var(--ink);
+  color: var(--bg);
+  padding: 12px 20px;
+  border-radius: var(--r-full);
+  font-weight: 700;
+  font-size: 0.92rem;
+  z-index: 200;
+  max-width: calc(100% - 32px);
+  box-shadow: var(--shadow-lg);
+  pointer-events: none;
+  animation: toastIn 0.25s var(--ease) forwards;
+}
+
+@keyframes toastIn {
+  from { opacity: 0; transform: translate(-50%, 12px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+.toast[hidden] {
+  display: none !important;
+}
+

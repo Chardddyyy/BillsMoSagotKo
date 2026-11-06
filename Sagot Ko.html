@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>BMSK BillsMoSagotKo</title>
+  <meta name="description" content="BMSK BillsMoSagotKo - Pay it forward, one bill at a time. Direct utility bill sponsorship and verified charity portal.">
+  <meta name="theme-color" content="#0F5C4D">
+  
+  <!-- Favicon / Official Brand Icon -->
+  <link rel="icon" type="image/png" href="assets/bmsk-icon.png">
+
+  <!-- Typography: Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600;700&display=swap">
+
+  <!-- Modular Stylesheets -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/modals.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('sk.theme');
+        if (t !== 'light' && t !== 'dark') {
+          t = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+        }
+        document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body>
+
+<div class="wrap">
+  <!-- Sticky Header -->
+  <header class="top" role="banner">
+    <a href="#bills" class="brand" aria-label="BMSK BillsMoSagotKo Home">
+      <div class="brand-logo">
+        <img src="assets/bmsk-icon.png" alt="BMSK Logo" class="brand-img" width="40" height="40">
+      </div>
+      <div class="brand-text">
+        <div class="brand-title">
+          <span class="brand-badge">BMSK</span>
+          <b>BillsMoSagotKo</b>
+        </div>
+        <small data-i18n="tag"></small>
+      </div>
+    </a>
+
+    <div class="tools" role="toolbar" aria-label="User preferences">
+      <!-- Donor Profile & 1-Click GCash Button -->
+      <button type="button" class="btn small profile-btn" id="profile-btn" data-action="profile" aria-label="Donor GCash Profile">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span class="profile-label" data-i18n="donor_profile">Donor Profile</span>
+      </button>
+
+      <!-- Language Selector -->
+      <div class="seg" role="group" aria-label="Language">
+        <button type="button" id="lang-en" aria-pressed="true">EN</button>
+        <button type="button" id="lang-fil" aria-pressed="false">FIL</button>
+      </div>
+      <!-- Theme Switcher -->
+      <button type="button" class="iconbtn" id="theme-btn" aria-label="Toggle theme"></button>
+    </div>
+  </header>
+
+  <!-- Section Navigation Tabs -->
+  <nav class="tabs" aria-label="Main sections">
+    <a href="#bills" data-tab="bills" data-i18n="nav_bills"></a>
+    <a href="#charities" data-tab="charities" data-i18n="nav_charities"></a>
+    <a href="#how" data-tab="how" data-i18n="nav_how"></a>
+  </nav>
+
+  <!-- Hero Section -->
+  <main>
+    <div class="hero">
+      <h1 id="hero-h"></h1>
+      <p data-i18n="hero_p"></p>
+      <div class="cta">
+        <button type="button" class="btn primary" data-action="post" data-i18n="cta_post"></button>
+        <a class="btn" href="#charities" data-i18n="cta_give"></a>
+      </div>
+      <!-- Live Counters -->
+      <div class="stats" id="stats"></div>
+      <div class="note" id="mode-note" hidden></div>
+    </div>
+
+    <!-- View: Open Bills -->
+    <section id="v-bills" aria-labelledby="bills-heading">
+      <div class="sec-head">
+        <div>
+          <h2 id="bills-heading" data-i18n="bills_h"></h2>
+          <p data-i18n="bills_p"></p>
+        </div>
+      </div>
+      <div class="filters" role="search">
+        <input id="q" type="search" data-i18n-ph="search_ph" data-i18n-aria="search_ph" autocomplete="off">
+        <select id="ftype" data-i18n-aria="f_type"></select>
+        <select id="fsort" data-i18n-aria="f_sort"></select>
+      </div>
+      <div class="grid" id="bills" role="feed" aria-busy="false"></div>
+    </section>
+
+    <!-- View: Charities -->
+    <section id="v-charities" hidden aria-labelledby="charities-heading">
+      <div class="sec-head">
+        <div>
+          <h2 id="charities-heading" data-i18n="ch_h"></h2>
+          <p data-i18n="ch_p"></p>
+        </div>
+      </div>
+      <div class="filters" role="search">
+        <input id="cq" type="search" data-i18n-ph="ch_search" data-i18n-aria="ch_search" autocomplete="off">
+      </div>
+      <div class="chips" id="cchips" role="group" aria-label="Charity categories"></div>
+      <div class="grid" id="charities"></div>
+    </section>
+
+    <!-- View: How It Works -->
+    <section id="v-how" hidden aria-labelledby="how-heading">
+      <div class="sec-head">
+        <div>
+          <h2 id="how-heading" data-i18n="how_h"></h2>
+        </div>
+      </div>
+      <div class="cols">
+        <div class="card">
+          <h3 data-i18n="how_a_h"></h3>
+          <ol id="how-a"></ol>
+        </div>
+        <div class="card">
+          <h3 data-i18n="how_b_h"></h3>
+          <ol id="how-b"></ol>
+        </div>
+        <div class="card">
+          <h3 data-i18n="how_c_h"></h3>
+          <ul id="how-c"></ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="foot" role="contentinfo">
+    <p data-i18n="foot_1"></p>
+    <p data-i18n="foot_2"></p>
+  </footer>
+</div>
+
+<!-- ==========================================================================
+     MODALS
+     ========================================================================== -->
+
+<!-- Modal: Post a Bill -->
+<div class="modal" id="m-post" hidden role="dialog" aria-modal="true" aria-labelledby="post-title">
+  <div class="sheet">
+    <button type="button" class="iconbtn xbtn" data-close aria-label="Close dialog">&times;</button>
+    <h2 id="post-title" data-i18n="post_h"></h2>
+    <p class="sub" data-i18n="post_sub"></p>
+    <form id="f-post" novalidate>
+      <!-- Anti-Bot Honeypot -->
+      <input type="text" id="hp-post" class="sr" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <div class="two">
+        <label class="f">
+          <span data-i18n="p_type"></span>
+          <select class="in" id="p-type"></select>
+        </label>
+        <label class="f">
+          <span data-i18n="p_amount"></span>
+          <input class="in" id="p-amount" type="number" inputmode="decimal" min="1" max="500000" step="0.01" placeholder="1250">
+        </label>
+      </div>
+      <label class="f">
+        <span data-i18n="p_biller"></span>
+        <input class="in" id="p-biller" maxlength="80" autocomplete="off">
+      </label>
+      <div class="two">
+        <label class="f">
+          <span data-i18n="p_account"></span>
+          <input class="in" id="p-account" maxlength="60" inputmode="text" autocomplete="off">
+        </label>
+        <label class="f">
+          <span data-i18n="p_due"></span>
+          <input class="in" id="p-due" type="date">
+        </label>
+      </div>
+      <label class="f">
+        <span data-i18n="p_story"></span>
+        <textarea class="in" id="p-story" maxlength="300"></textarea>
+        <small data-i18n="p_story_hint"></small>
+      </label>
+      <label class="f">
+        <span data-i18n="p_photo"></span>
+        <input class="in" id="p-photo" type="file" accept="image/*">
+        <small data-i18n="p_photo_hint"></small>
+      </label>
+      <label class="f">
+        <span data-i18n="p_name"></span>
+        <input class="in" id="p-name" maxlength="50" autocomplete="name">
+      </label>
+      <label class="check">
+        <input type="checkbox" id="p-anon">
+        <span data-i18n="p_anon"></span>
+      </label>
+      <div class="warnbox" data-i18n="p_warn"></div>
+      <div class="err" id="p-err" role="alert"></div>
+      <button type="submit" class="btn primary" id="p-submit" data-i18n="p_submit"></button>
+    </form>
+  </div>
+</div>
+
+<!-- Modal: Pay a Bill -->
+<div class="modal" id="m-pay" hidden role="dialog" aria-modal="true" aria-labelledby="pay-title">
+  <div class="sheet">
+    <button type="button" class="iconbtn xbtn" data-close aria-label="Close dialog">&times;</button>
+    <h2 id="pay-title"></h2>
+    <p class="sub" id="pay-sub"></p>
+    
+    <!-- Step 1: Donor Info (skipped automatically if Donor Profile is active) -->
+    <div id="pay-a">
+      <div class="profile-hint-banner" id="pay-profile-banner" hidden>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        <span id="pay-profile-text"></span>
+      </div>
+      <form id="f-pay" novalidate>
+        <label class="f">
+          <span data-i18n="d_name"></span>
+          <input class="in" id="d-name" maxlength="50" autocomplete="name">
+        </label>
+        <label class="check">
+          <input type="checkbox" id="d-anon">
+          <span data-i18n="d_anon"></span>
+        </label>
+        <label class="f">
+          <span data-i18n="d_gcash"></span>
+          <input class="in" id="d-gcash" inputmode="tel" maxlength="16" placeholder="09XX XXX XXXX" autocomplete="tel">
+          <small data-i18n="d_gcash_hint"></small>
+        </label>
+        <label class="check" style="margin-top: 4px;">
+          <input type="checkbox" id="d-save-profile" checked>
+          <span data-i18n="save_to_profile">Save to my Donor Profile for 1-Click GCash Pay</span>
+        </label>
+        <div class="err" id="d-err" role="alert"></div>
+        <button type="submit" class="btn primary" data-i18n="d_continue"></button>
+      </form>
+    </div>
+
+    <!-- Step 2: GCash Details & Verification Proof -->
+    <div id="pay-b" hidden>
+      <div class="kv" id="pay-kv"></div>
+      
+      <!-- 1-Click GCash Direct Launch -->
+      <div class="direct-pay-box">
+        <p style="margin: 0 0 8px; font-weight: 700;" data-i18n="pay_steps_h"></p>
+        <ol class="steps" id="pay-steps"></ol>
+        <div class="cta" style="margin-top: 14px;">
+          <a class="btn gold gcash-direct-btn" id="open-gcash-btn" href="https://www.gcash.com/" target="_blank" rel="noopener">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            <span data-i18n="open_gcash_direct">Open GCash App & Pay</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Payment Verification Form (Strictly Prevents Fake Claims) -->
+      <form id="f-paid" novalidate style="margin-top: 18px; border-top: 1px solid var(--line); padding-top: 16px;">
+        <!-- Anti-Bot Honeypot -->
+        <input type="text" id="hp-pay" class="sr" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+        <h3 style="font-size: 1.15rem; font-weight: 800; margin-bottom: 4px;" data-i18n="verify_payment_h">Verify Payment to Mark Paid</h3>
+        <p style="font-size: 0.88rem; color: var(--muted); margin-bottom: 14px;" data-i18n="verify_payment_sub">To prevent fake claims, entering your authentic GCash reference number and receipt screenshot is required.</p>
+
+        <!-- Mandatory Reference Number -->
+        <label class="f">
+          <span data-i18n="ref_label_required">GCash Reference No. (Required) *</span>
+          <input class="in" id="d-ref" maxlength="40" required placeholder="e.g. 0012 3456 7890 1" autocomplete="off">
+          <small data-i18n="ref_hint_strict">Enter the 8 to 13-digit reference number from your official GCash receipt SMS/screen.</small>
+        </label>
+
+        <!-- Mandatory Payment Receipt Upload -->
+        <label class="f">
+          <span data-i18n="receipt_label">GCash Payment Receipt Screenshot (Required) *</span>
+          <input class="in" id="d-receipt" type="file" accept="image/*" required>
+          <small data-i18n="receipt_hint">Attach a screenshot of your GCash receipt to prove authenticity and protect the requester.</small>
+        </label>
+
+        <!-- Mandatory Certification Gate -->
+        <label class="check" style="background: var(--soft); padding: 12px 14px; border-radius: 10px; margin-top: 4px;">
+          <input type="checkbox" id="d-certify" required>
+          <span data-i18n="certify_paid">I certify that I have genuinely paid this utility bill directly to the biller in GCash.</span>
+        </label>
+
+        <div class="err" id="paid-err" role="alert"></div>
+        <button type="submit" class="btn primary" id="btn-submit-paid" data-i18n="i_paid"></button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Modal: Donor Profile & 1-Click GCash Settings -->
+<div class="modal" id="m-profile" hidden role="dialog" aria-modal="true" aria-labelledby="profile-title">
+  <div class="sheet">
+    <button type="button" class="iconbtn xbtn" data-close aria-label="Close dialog">&times;</button>
+    <h2 id="profile-title" data-i18n="profile_h">Donor Profile & 1-Click GCash</h2>
+    <p class="sub" data-i18n="profile_sub">Save your GCash account on this device to enable instant 1-click payments.</p>
+    <form id="f-profile" novalidate>
+      <label class="f">
+        <span data-i18n="profile_name">Donor Display Name (optional)</span>
+        <input class="in" id="prof-name" maxlength="50" autocomplete="name" placeholder="e.g. Juan Dela Cruz">
+      </label>
+      <label class="f">
+        <span data-i18n="profile_gcash">Your GCash Mobile Number</span>
+        <input class="in" id="prof-gcash" inputmode="tel" maxlength="16" placeholder="09XX XXX XXXX" autocomplete="tel">
+        <small data-i18n="profile_gcash_hint">Saved securely on your device only. Used to streamline your donations.</small>
+      </label>
+      <label class="check" style="background: var(--soft); padding: 12px 14px; border-radius: 10px;">
+        <input type="checkbox" id="prof-quick" checked>
+        <span data-i18n="profile_quick">Enable 1-Click Pay (auto-copy account number & launch GCash)</span>
+      </label>
+      <div class="err" id="prof-err" role="alert"></div>
+      <button type="submit" class="btn primary" data-i18n="profile_save">Save Profile Settings</button>
+    </form>
+  </div>
+</div>
+
+<!-- Modal: Give to Charity -->
+<div class="modal" id="m-give" hidden role="dialog" aria-modal="true" aria-labelledby="give-title">
+  <div class="sheet">
+    <button type="button" class="iconbtn xbtn" data-close aria-label="Close dialog">&times;</button>
+    <h2 id="give-title"></h2>
+    <p class="sub" id="give-sub"></p>
+
+    <!-- Step 1: Amount & Donor details -->
+    <div id="give-a">
+      <form id="f-give" novalidate>
+        <div>
+          <p style="font-weight: 700; font-size: 0.94rem; margin-bottom: 8px;" data-i18n="g_amount"></p>
+          <div class="amts" id="g-amts"></div>
+        </div>
+        <label class="f">
+          <span data-i18n="g_custom"></span>
+          <input class="in" id="g-amount" type="number" inputmode="decimal" min="1" step="1" placeholder="500">
+        </label>
+        <label class="f">
+          <span data-i18n="d_name"></span>
+          <input class="in" id="g-name" maxlength="50" autocomplete="name">
+        </label>
+        <label class="check">
+          <input type="checkbox" id="g-anon">
+          <span data-i18n="d_anon"></span>
+        </label>
+        <label class="f">
+          <span data-i18n="d_gcash"></span>
+          <input class="in" id="g-gcash" inputmode="tel" maxlength="16" placeholder="09XX XXX XXXX" autocomplete="tel">
+          <small data-i18n="d_gcash_hint"></small>
+        </label>
+        <div class="err" id="g-err" role="alert"></div>
+        <button type="submit" class="btn primary" data-i18n="d_continue"></button>
+      </form>
+    </div>
+
+    <!-- Step 2: Charity Verification & Link -->
+    <div id="give-b" hidden>
+      <div class="kv" id="give-kv"></div>
+      <p style="margin: 16px 0 8px; font-weight: 700;" data-i18n="pay_steps_h"></p>
+      <ol class="steps" id="give-steps"></ol>
+      <div class="warnbox" style="margin-top: 16px;" data-i18n="g_verify"></div>
+      <div class="cta" style="margin-top: 18px;">
+        <a class="btn gold" href="https://www.gcash.com/" target="_blank" rel="noopener" data-i18n="open_gcash"></a>
+        <a class="btn" id="give-site" href="#" target="_blank" rel="noopener" data-i18n="official_page"></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal: Lightbox Bill Photo Viewer -->
+<div class="modal lightbox" id="m-img" hidden role="dialog" aria-modal="true" aria-label="Bill photo full preview">
+  <div class="sheet">
+    <button type="button" class="iconbtn xbtn" data-close aria-label="Close dialog">&times;</button>
+    <img id="lb-img" alt="Official bill copy photo">
+  </div>
+</div>
+
+<!-- Floating Toast Notification -->
+<div class="toast" id="toast" hidden role="status" aria-live="polite"></div>
+
+<!-- Modular Scripts -->
+<script src="js/i18n.js"></script>
+<script src="js/data.js"></script>
+<script src="js/security.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
+

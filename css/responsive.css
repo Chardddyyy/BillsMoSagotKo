@@ -1,0 +1,249 @@
+/* ==========================================================================
+   BMSK BillsMoSagotKo - Responsive & Adaptability Styles
+   ========================================================================== */
+
+/* ---------------- Small Mobile Devices (< 420px) ---------------- */
+@media (max-width: 420px) {
+  .top {
+    padding: 8px 10px;
+    gap: 8px;
+  }
+
+  .brand {
+    gap: 8px;
+  }
+
+  .brand b {
+    font-size: 1.05rem;
+  }
+
+  .brand small {
+    display: none; /* Hide tagline on ultra-narrow screens to prevent header height blowup */
+  }
+
+  .tools {
+    gap: 6px;
+  }
+
+  .seg button {
+    padding: 5px 8px;
+    min-height: 32px;
+    font-size: 0.78rem;
+  }
+
+  .iconbtn {
+    width: 36px;
+    height: 36px;
+  }
+
+  .hero h1 {
+    font-size: 1.85rem;
+  }
+
+  .amt {
+    font-size: 1.8rem;
+  }
+
+  .cta {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .cta .btn {
+    width: 100%;
+  }
+
+  .stats {
+    flex-direction: column;
+    gap: 12px;
+    padding: 12px 14px;
+  }
+
+  .filters {
+    flex-direction: column;
+  }
+
+  .filters input,
+  .filters select {
+    width: 100%;
+  }
+
+  .sheet {
+    padding: 20px 14px calc(20px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+/* ---------------- Mobile & Tablet Portrait (< 640px) ---------------- */
+@media (max-width: 639px) {
+  body {
+    padding-left: max(12px, env(safe-area-inset-left, 0px));
+    padding-right: max(12px, env(safe-area-inset-right, 0px));
+  }
+
+  .wrap {
+    padding-bottom: 40px;
+  }
+
+  .hero {
+    padding: 20px 0 8px;
+    gap: 16px;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    gap: 14px;
+  }
+
+  .stats b {
+    font-size: 1.35rem;
+  }
+
+  /* Make actions full width on mobile for easier tapping */
+  .actions {
+    flex-direction: column;
+  }
+
+  .actions .btn {
+    width: 100%;
+  }
+
+  .ch .links {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .ch .links .btn {
+    width: 100%;
+  }
+}
+
+/* ---------------- Tablet Devices (640px to 1023px) ---------------- */
+@media (min-width: 640px) and (max-width: 1023px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .hero {
+    padding: 32px 0 16px;
+  }
+
+  .hero h1 {
+    font-size: 2.8rem;
+  }
+
+  .stats {
+    justify-content: flex-start;
+    gap: 20px 40px;
+  }
+
+  .filters select {
+    flex: 0 0 auto;
+    min-width: 160px;
+  }
+}
+
+/* ---------------- Desktop Devices (>= 1024px) ---------------- */
+@media (min-width: 1024px) {
+  .wrap {
+    max-width: 1140px;
+  }
+
+  .top {
+    margin-top: 14px;
+    padding: 10px 18px;
+  }
+
+  .brand b {
+    font-size: 1.32rem;
+  }
+
+  .brand small {
+    font-size: 0.82rem;
+  }
+
+  .hero {
+    padding: 40px 0 20px;
+    gap: 24px;
+  }
+
+  .hero h1 {
+    font-size: 3.4rem;
+    max-width: 20ch;
+  }
+
+  .hero p {
+    font-size: 1.15rem;
+  }
+
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+  }
+
+  .stats {
+    display: inline-flex;
+    padding: 16px 28px;
+    gap: 48px;
+  }
+
+  .stats b {
+    font-size: 1.75rem;
+  }
+
+  .stats span {
+    font-size: 0.9rem;
+  }
+
+  .filters {
+    align-items: center;
+  }
+
+  .filters select {
+    min-width: 180px;
+  }
+
+  /* Hover micro-interactions on desktop */
+  .bill, .ch, .card {
+    transition: transform var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease), border-color var(--dur-fast) ease;
+  }
+
+  .bill:hover:not(.paid) {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .ch:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
+}
+
+/* ---------------- Large Screens (>= 1280px) ---------------- */
+@media (min-width: 1280px) {
+  .wrap {
+    max-width: 1200px;
+  }
+}
+
+/* ---------------- Accessibility: Reduced Motion ---------------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .bill:hover,
+  .ch:hover,
+  .btn:hover {
+    transform: none !important;
+  }
+}
+

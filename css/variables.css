@@ -1,0 +1,165 @@
+/* ==========================================================================
+   BMSK BillsMoSagotKo - Design Tokens & Theme Variables
+   ========================================================================== */
+
+:root {
+  /* Color Palette - Light Theme (Default) */
+  --bg: #EDF3EF;
+  --surface: #FFFFFF;
+  --surface-card: #FFFFFF;
+  --surface-hover: #F8FBF9;
+  --ink: #0E2A24;
+  --ink-secondary: #24413A;
+  --muted: #4F6A62;
+  --line: #CBD8D1;
+  --line-subtle: #E2ECE6;
+
+  /* Brand Colors */
+  --brand: #0F5C4D;
+  --brand-hover: #0B463A;
+  --brand-light: #E4F1EC;
+  --on-brand: #FFFFFF;
+
+  /* Accent Colors (GCash Gold / Attention) */
+  --accent: #E9A100;
+  --accent-hover: #D49200;
+  --accent-light: #FFF8E6;
+  --on-accent: #241A00;
+
+  /* Semantic Feedback */
+  --good: #1B834F;
+  --good-bg: #E7F7EF;
+  --warn: #BA3E1D;
+  --warn-bg: #FEEFEA;
+  --soft: #E1ECE6;
+
+  /* Typography */
+  --f-display: 'Bricolage Grotesque', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --f-body: 'Figtree', 'Segoe UI', system-ui, -apple-system, Roboto, sans-serif;
+  --f-mono: 'IBM Plex Mono', ui-monospace, Menlo, Consolas, monospace;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 6px -1px rgba(14, 42, 36, 0.08);
+  --shadow-md: 0 6px 18px -4px rgba(14, 42, 36, 0.12);
+  --shadow-lg: 0 14px 34px -8px rgba(14, 42, 36, 0.2);
+  --shadow-card: 0 4px 14px -3px rgba(14, 42, 36, 0.07);
+
+  /* Radii */
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 16px;
+  --r-full: 9999px;
+
+  /* Transitions */
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast: 0.15s;
+  --dur-normal: 0.25s;
+
+  color-scheme: light;
+}
+
+/* System Dark Mode (Automatic) */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0B1613;
+    --surface: #12221D;
+    --surface-card: #152721;
+    --surface-hover: #1A312A;
+    --ink: #E6F1EC;
+    --ink-secondary: #B6CEC4;
+    --muted: #9DB5AC;
+    --line: #26392F;
+    --line-subtle: #1C2D25;
+
+    --brand: #4FC3A1;
+    --brand-hover: #67d6b6;
+    --brand-light: #18382F;
+    --on-brand: #04201A;
+
+    --accent: #F2B632;
+    --accent-hover: #f7c55c;
+    --accent-light: #382A08;
+    --on-accent: #241A00;
+
+    --good: #5BD08F;
+    --good-bg: #0D3320;
+    --warn: #FF9273;
+    --warn-bg: #381A12;
+    --soft: #182C25;
+
+    --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 6px 20px rgba(0, 0, 0, 0.5);
+    --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.65);
+    --shadow-card: 0 4px 14px rgba(0, 0, 0, 0.4);
+
+    color-scheme: dark;
+  }
+}
+
+/* Explicit Dark Theme */
+:root[data-theme="dark"] {
+  --bg: #0B1613;
+  --surface: #12221D;
+  --surface-card: #152721;
+  --surface-hover: #1A312A;
+  --ink: #E6F1EC;
+  --ink-secondary: #B6CEC4;
+  --muted: #9DB5AC;
+  --line: #26392F;
+  --line-subtle: #1C2D25;
+
+  --brand: #4FC3A1;
+  --brand-hover: #67d6b6;
+  --brand-light: #18382F;
+  --on-brand: #04201A;
+
+  --accent: #F2B632;
+  --accent-hover: #f7c55c;
+  --accent-light: #382A08;
+  --on-accent: #241A00;
+
+  --good: #5BD08F;
+  --good-bg: #0D3320;
+  --warn: #FF9273;
+  --warn-bg: #381A12;
+  --soft: #182C25;
+
+  --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 6px 20px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.65);
+  --shadow-card: 0 4px 14px rgba(0, 0, 0, 0.4);
+
+  color-scheme: dark;
+}
+
+/* Explicit Light Theme */
+:root[data-theme="light"] {
+  --bg: #EDF3EF;
+  --surface: #FFFFFF;
+  --surface-card: #FFFFFF;
+  --surface-hover: #F8FBF9;
+  --ink: #0E2A24;
+  --ink-secondary: #24413A;
+  --muted: #4F6A62;
+  --line: #CBD8D1;
+  --line-subtle: #E2ECE6;
+
+  --brand: #0F5C4D;
+  --brand-hover: #0B463A;
+  --brand-light: #E4F1EC;
+  --on-brand: #FFFFFF;
+
+  --accent: #E9A100;
+  --accent-hover: #D49200;
+  --accent-light: #FFF8E6;
+  --on-accent: #241A00;
+
+  --good: #1B834F;
+  --good-bg: #E7F7EF;
+  --warn: #BA3E1D;
+  --warn-bg: #FEEFEA;
+  --soft: #E1ECE6;
+
+  color-scheme: light;
+}
+

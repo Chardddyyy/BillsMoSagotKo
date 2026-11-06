@@ -1,0 +1,18 @@
+{
+  "name": "bills-mo-sagot-ko",
+  "version": "1.0.0",
+  "description": "BMSK BillsMoSagotKo - Pay it forward, one bill at a time.",
+  "scripts": {
+    "start": "python3 -m http.server 8088",
+    "serve": "python3 -m http.server 8088"
+  },
+  "keywords": [
+    "bmsk",
+    "bills-mo-sagot-ko",
+    "gcash",
+    "community",
+    "crowdsourcing"
+  ],
+  "author": "",
+  "license": "ISC"
+}
